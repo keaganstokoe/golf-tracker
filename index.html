@@ -50,6 +50,7 @@ h2 .sub{display:block;font-family:'JetBrains Mono',monospace;font-size:.6rem;let
 .lb-row.leader .lb-rank{border-right:3px solid var(--accent);font-size:2.4rem}
 .lb-name{padding:12px 16px;font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase}
 .lb-name .streak{display:block;font-size:.6rem;color:var(--accent);letter-spacing:2px;font-weight:400;margin-top:2px}
+.lb-name .banter{display:block;font-size:.55rem;color:#888;letter-spacing:1px;font-weight:400;margin-top:4px;font-style:italic;text-transform:none}
 .lb-stats{text-align:right;padding:12px 16px;font-size:.75rem}
 .lb-stats span{display:block}
 .lb-stats .wins{font-family:'Inter',sans-serif;font-size:1.6rem;font-weight:900;color:var(--accent);line-height:1}
@@ -209,7 +210,14 @@ input::placeholder{color:#333}
 
 <script>
 const DEFAULT_PLAYERS = ['Keagan','James','Ben','Jacques','Shaun','Zach','Matt','Spencer'];
-let state = JSON.parse(localStorage.getItem('golfTracker') || 'null') || {players:DEFAULT_PLAYERS, rounds:[]};
+const FIRST_ROUND = {date:'2026-02-18',course:'METROPOLITAN GOLF CLUB',type:'individual',scores:{Keagan:39,James:39,Ben:39,Jacques:41}};
+const BANTER_LEADER = ['Built different.','Carrying the group.','The rest of you are fighting for second.','Cold. Calculated. Clinical.','Pack it up boys.','Not even close.','Undisputed.'];
+const BANTER_LAST = ['Somebody call a marshal.','At least the beer was cold.','Paying for lessons yet?','There\'s always mini golf.','The course won today.','Bless your heart.','Your handicap has a handicap.','Participation trophy incoming.','Down bad.','The trees saw more of your ball than the fairway did.'];
+const BANTER_MID = ['Mid.','Room for improvement (lots of room).','Not last, not first. Switzerland.','The definition of "fine."','Your mum would be proud. Your coach wouldn\'t.','Solidly mediocre.'];
+const BANTER_TIED = ['Dead heat. Settle it on the 19th hole.','Shared glory. Shared shame.','Couldn\'t separate you with a rangefinder.','Tied — like your shoelaces should\'ve been.'];
+const BANTER_NO_SHOW = ['DNS. The coward\'s strategy.','Didn\'t fancy the embarrassment today?','Missing in action.','Probably for the best.','Smart — can\'t lose if you don\'t play.'];
+function getBanter(pos,total,tied){if(tied)return BANTER_TIED[Math.floor(Math.random()*BANTER_TIED.length)];if(pos===0)return BANTER_LEADER[Math.floor(Math.random()*BANTER_LEADER.length)];if(pos===total-1)return BANTER_LAST[Math.floor(Math.random()*BANTER_LAST.length)];return BANTER_MID[Math.floor(Math.random()*BANTER_MID.length)];}
+let state = JSON.parse(localStorage.getItem('golfTracker') || 'null') || {players:DEFAULT_PLAYERS, rounds:[FIRST_ROUND]};
 let currentLB = 'individual';
 let roundType = 'individual';
 let teamFormat = '2v2';
@@ -316,7 +324,9 @@ function renderLB(){
       const rank=String(i+1).padStart(2,'0');
       const streakTxt=s.streak>=2?`<span class="streak">▲ ${s.streak} STREAK</span>`:'';
       const isLeader=i===0;
-      return `<div class="lb-row${isLeader?' leader':''}"><div class="lb-rank">${rank}</div><div class="lb-name">${name.toUpperCase()} ${streakTxt}</div><div class="lb-stats"><span class="wins">${s.wins}</span><span class="avg">AVG ${avg} · BEST ${s.best===Infinity?'—':s.best}</span></div></div>`;
+      const tied=i>0&&arr[i-1][1].wins===s.wins;
+      const banter=getBanter(i,arr.length,tied);
+      return `<div class="lb-row${isLeader?' leader':''}"><div class="lb-rank">${rank}</div><div class="lb-name">${name.toUpperCase()} ${streakTxt}<div class="banter">${banter}</div></div><div class="lb-stats"><span class="wins">${s.wins}</span><span class="avg">AVG ${avg} · BEST ${s.best===Infinity?'—':s.best}</span></div></div>`;
     }).join('');
   } else {
     const teams=getTeamStats();
@@ -400,7 +410,9 @@ function renderHistory(){
       <div class="scores">${entries.map(([p,s])=>{
         const isWinner=s===best;
         const teamBadge=r.teams?`<span class="team-label ${r.teams[p]==='A'?'team-a':'team-b'}">TM-${r.teams[p]}</span>`:'';
-        return `<div class="${isWinner?'winner':''}">${isWinner?'◆ ':'  '}${p.toUpperCase()}: ${s} ${teamBadge}</div>`;
+        const pos=entries.findIndex(e=>e[0]===p);const tied=pos>0&&entries[pos-1][1]===s;
+        const rb=isWinner?getBanter(0,entries.length,false):pos===entries.length-1?getBanter(entries.length-1,entries.length,false):'';
+        return `<div class="${isWinner?'winner':''}">${isWinner?'◆ ':'  '}${p.toUpperCase()}: ${s} ${teamBadge}${rb?' <span style="color:#555;font-size:.6rem;font-style:italic;letter-spacing:1px">— ${rb}</span>':''}</div>`;
       }).join('')}</div>
       <button class="btn btn-danger" style="width:auto;margin-top:12px;padding:6px 16px" onclick="deleteRound(${state.rounds.indexOf(r)})">DELETE</button>
     </div>`;
