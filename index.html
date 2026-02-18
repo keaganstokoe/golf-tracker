@@ -7,31 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--black:#000;--lime:#CCFF00;--white:#fff;--grey:#888;--dark:#111;--mid:#222;--teamA:#CCFF00;--teamB:#00CCFF}
+:root{--black:#000;--lime:#CCFF00;--white:#fff;--grey:#888;--dark:#111;--mid:#222;--t1:#CCFF00;--t2:#00CCFF;--t3:#FF6B00;--t4:#FF00FF}
 html,body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
 body{padding-bottom:80px}
-
-/* HEADER */
 .header{border-bottom:3px solid var(--lime);padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
 .header h1{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800;letter-spacing:2px;color:var(--lime)}
 .header-icons{display:flex;gap:12px}
 .header-icons button{background:none;border:none;color:var(--grey);font-size:20px;cursor:pointer;padding:4px}
 .header-icons button:hover{color:var(--lime)}
-
-/* NAV TABS */
 .nav{display:flex;border-bottom:2px solid var(--mid)}
 .nav button{flex:1;padding:14px 8px;background:none;border:none;color:var(--grey);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-bottom:3px solid transparent;transition:all .15s}
 .nav button.active{color:var(--lime);border-bottom-color:var(--lime)}
-
-/* LOG ROUND BUTTON */
 .log-btn{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--lime);color:var(--black);font-family:'JetBrains Mono',monospace;font-weight:800;font-size:16px;letter-spacing:3px;padding:18px 48px;border:none;cursor:pointer;z-index:100;text-transform:uppercase;box-shadow:0 0 30px rgba(204,255,0,.3)}
 .log-btn:active{transform:translateX(-50%) scale(.96)}
-
-/* PANELS */
 .panel{display:none;padding:20px}
 .panel.active{display:block}
-
-/* LEADERBOARD */
 .lb-player{border:2px solid var(--mid);padding:16px;margin-bottom:8px;display:flex;align-items:center;gap:14px;transition:border-color .2s}
 .lb-player.leader{border-color:var(--lime);background:rgba(204,255,0,.05)}
 .lb-player.last{border-color:#ff3333;background:rgba(255,0,0,.03)}
@@ -46,31 +36,31 @@ body{padding-bottom:80px}
 .lb-wins{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:800;color:var(--lime)}
 .last .lb-wins{color:#ff3333}
 .lb-wins-label{font-size:9px;color:var(--grey);text-transform:uppercase;letter-spacing:1px;font-family:'JetBrains Mono',monospace;text-align:center}
-
-/* TEAM TAB */
 .team-match{border:2px solid var(--mid);padding:16px;margin-bottom:10px}
-.team-match-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--grey);letter-spacing:1px;margin-bottom:8px}
+.team-match-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--grey);letter-spacing:1px;margin-bottom:4px}
 .team-match-course{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--grey);letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}
-.team-vs{display:flex;gap:12px;align-items:center}
+.fourball-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--grey);letter-spacing:2px;margin:12px 0 8px;text-transform:uppercase}
+.team-vs{display:flex;gap:12px;align-items:center;margin-bottom:8px}
 .team-side{flex:1;padding:12px;border:2px solid var(--mid)}
 .team-side.winner{border-color:var(--lime);background:rgba(204,255,0,.05)}
 .team-side.loser{opacity:.6}
-.team-side-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
-.team-side.a .team-side-label{color:var(--teamA)}
-.team-side.b .team-side-label{color:var(--teamB)}
-.team-names{font-size:12px;color:var(--grey);margin-bottom:6px}
+.team-side-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;color:var(--lime)}
+.team-side-name{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;margin-bottom:2px;color:var(--white)}
+.team-names{font-size:11px;color:var(--grey);margin-bottom:6px}
 .team-total{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800}
 .team-vs-divider{font-family:'JetBrains Mono',monospace;font-weight:800;color:var(--grey);font-size:14px}
 .team-banter{font-size:11px;font-style:italic;margin-top:8px;color:var(--lime)}
-
-/* SEASON STATS */
+.pair-card{border:2px solid var(--mid);padding:16px;margin-bottom:8px}
+.pair-card.top-pair{border-color:var(--lime);background:rgba(204,255,0,.05)}
+.pair-names{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1px}
+.pair-team-name{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lime);margin-top:2px}
+.pair-stats{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--grey);margin-top:6px}
+.pair-record{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:800;color:var(--lime)}
 .season-stats{margin-top:20px;border:2px solid var(--mid);padding:16px}
 .stat-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--mid)}
 .stat-row:last-child{border-bottom:none}
 .stat-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--grey);text-transform:uppercase;letter-spacing:1px}
 .stat-value{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--lime)}
-
-/* HISTORY */
 .history-round{border:2px solid var(--mid);padding:16px;margin-bottom:8px;cursor:pointer;transition:border-color .15s}
 .history-round:active{border-color:var(--lime)}
 .history-date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--lime);letter-spacing:1px}
@@ -80,9 +70,7 @@ body{padding-bottom:80px}
 .history-score.winner{border-color:var(--lime);color:var(--lime)}
 .history-details{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--mid)}
 .history-round.expanded .history-details{display:block}
-.history-team-result{font-size:12px;color:var(--grey);margin-top:8px}
-
-/* MODAL / WIZARD */
+.history-team-result{font-size:12px;color:var(--grey);margin-top:8px;font-family:'JetBrains Mono',monospace}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:200;overflow-y:auto}
 .modal-overlay.open{display:flex;flex-direction:column}
 .modal-header{padding:16px 20px;border-bottom:3px solid var(--lime);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
@@ -91,17 +79,12 @@ body{padding-bottom:80px}
 .modal-close:hover{border-color:var(--lime);color:var(--lime)}
 .modal-body{flex:1;padding:20px;overflow-y:auto}
 .modal-footer{padding:16px 20px;border-top:2px solid var(--mid);display:flex;gap:10px;flex-shrink:0}
-
 .wizard-step{display:none}
 .wizard-step.active{display:block}
-
-/* FORM ELEMENTS */
 .form-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:8px;display:block}
 .form-input{width:100%;padding:14px 16px;background:var(--dark);border:2px solid var(--mid);color:var(--white);font-family:'JetBrains Mono',monospace;font-size:16px;outline:none}
 .form-input:focus{border-color:var(--lime)}
 .form-input::placeholder{color:#444}
-
-/* SCORE ENTRY */
 .score-row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--mid)}
 .score-row.sat-out{opacity:.3}
 .score-name{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;flex:1;text-transform:uppercase;letter-spacing:1px}
@@ -112,27 +95,37 @@ body{padding-bottom:80px}
 .score-val::-webkit-inner-spin-button,.score-val::-webkit-outer-spin-button{-webkit-appearance:none}
 .sat-out-btn{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;background:none;border:1px solid var(--mid);color:var(--grey);padding:6px 10px;cursor:pointer;white-space:nowrap}
 .sat-out-btn.active{border-color:#ff3333;color:#ff3333}
-
-/* TEAM ASSIGNMENT */
-.team-assign-player{padding:16px;margin-bottom:8px;border:3px solid var(--mid);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
-.team-assign-player.teamA{border-color:var(--teamA);background:rgba(204,255,0,.08)}
-.team-assign-player.teamB{border-color:var(--teamB);background:rgba(0,204,255,.08)}
-.team-assign-name{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:1px}
-.team-assign-score{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--grey)}
+/* Team assignment - 4 teams */
+.team-assign-section{margin-bottom:20px}
+.fourball-header{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin:20px 0 12px;padding:8px 0;border-top:2px solid var(--mid)}
+.team-assign-player{padding:14px;margin-bottom:6px;border:3px solid var(--mid);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.team-assign-player.t1{border-color:var(--t1);background:rgba(204,255,0,.08)}
+.team-assign-player.t2{border-color:var(--t2);background:rgba(0,204,255,.08)}
+.team-assign-player.t3{border-color:var(--t3);background:rgba(255,107,0,.08)}
+.team-assign-player.t4{border-color:var(--t4);background:rgba(255,0,255,.08)}
+.team-assign-name{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1px}
+.team-assign-score{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--grey)}
 .team-assign-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;font-weight:700}
-.teamA .team-assign-tag{color:var(--teamA)}
-.teamB .team-assign-tag{color:var(--teamB)}
-.team-totals{display:flex;gap:12px;margin-top:16px;padding-top:16px;border-top:2px solid var(--mid)}
-.team-total-box{flex:1;padding:16px;border:2px solid var(--mid);text-align:center}
-.team-total-box.a{border-color:var(--teamA)}
-.team-total-box.b{border-color:var(--teamB)}
-.team-total-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
-.team-total-box.a .team-total-label{color:var(--teamA)}
-.team-total-box.b .team-total-label{color:var(--teamB)}
-.team-total-num{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:800}
+.t1 .team-assign-tag{color:var(--t1)}
+.t2 .team-assign-tag{color:var(--t2)}
+.t3 .team-assign-tag{color:var(--t3)}
+.t4 .team-assign-tag{color:var(--t4)}
+.team-totals-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;padding-top:16px;border-top:2px solid var(--mid)}
+.team-total-box{padding:12px;border:2px solid var(--mid);text-align:center}
+.team-total-box.tb1{border-color:var(--t1)}
+.team-total-box.tb2{border-color:var(--t2)}
+.team-total-box.tb3{border-color:var(--t3)}
+.team-total-box.tb4{border-color:var(--t4)}
+.team-total-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.tb1 .team-total-label{color:var(--t1)}
+.tb2 .team-total-label{color:var(--t2)}
+.tb3 .team-total-label{color:var(--t3)}
+.tb4 .team-total-label{color:var(--t4)}
+.team-total-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800}
+.team-total-players{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--grey);margin-top:4px;text-transform:uppercase}
+.team-name-select{width:100%;margin-top:6px;padding:6px;background:var(--dark);border:1px solid var(--mid);color:var(--white);font-family:'JetBrains Mono',monospace;font-size:11px}
 .team-hint{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--grey);text-align:center;margin-bottom:16px;letter-spacing:1px;text-transform:uppercase}
-
-/* BUTTONS */
+.fb-vs-label{font-family:'JetBrains Mono',monospace;font-size:11px;text-align:center;color:var(--grey);margin:4px 0;letter-spacing:2px}
 .btn{padding:16px 32px;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border:none;transition:all .1s}
 .btn:active{transform:scale(.97)}
 .btn-primary{background:var(--lime);color:var(--black)}
@@ -140,20 +133,14 @@ body{padding-bottom:80px}
 .btn-secondary:hover{border-color:var(--lime);color:var(--lime)}
 .btn-full{width:100%}
 .btn-skip{background:none;border:2px solid var(--mid);color:var(--grey)}
-
-/* CONFETTI */
 .confetti-container{position:fixed;inset:0;pointer-events:none;z-index:999}
 .confetti-piece{position:absolute;width:10px;height:10px;top:-10px;animation:confettiFall 1.5s ease-out forwards}
 @keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
-
-/* SUCCESS SCREEN */
 .success-screen{display:none;position:fixed;inset:0;background:var(--black);z-index:300;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
 .success-screen.open{display:flex}
 .success-icon{font-size:80px;margin-bottom:20px}
 .success-title{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:800;color:var(--lime);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
 .success-sub{font-size:14px;color:var(--grey);margin-bottom:32px}
-
-/* SETTINGS */
 .settings-section{margin-bottom:24px}
 .settings-section h3{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--lime);margin-bottom:12px}
 .settings-player{display:flex;gap:8px;margin-bottom:6px}
@@ -161,16 +148,13 @@ body{padding-bottom:80px}
 .settings-actions{display:flex;flex-direction:column;gap:8px}
 .btn-danger{background:none;border:2px solid #ff3333;color:#ff3333}
 .btn-danger:hover{background:#ff3333;color:var(--black)}
-
-/* SECTION HEADERS */
 .section-head{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--mid)}
-
-/* FOOTER */
 .footer{text-align:center;padding:20px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:2px;text-transform:uppercase;margin-bottom:60px}
-
-/* NO DATA */
 .empty-state{text-align:center;padding:60px 20px;color:var(--grey)}
 .empty-state p{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1px;margin-bottom:8px}
+.sub-tabs{display:flex;gap:0;margin-bottom:16px}
+.sub-tab{flex:1;padding:10px;background:var(--dark);border:2px solid var(--mid);color:var(--grey);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;cursor:pointer}
+.sub-tab.active{border-color:var(--lime);color:var(--lime);background:rgba(204,255,0,.05)}
 </style>
 </head>
 <body>
@@ -178,27 +162,19 @@ body{padding-bottom:80px}
 <div class="header">
   <h1>⛳ COVE GOLF</h1>
   <div class="header-icons">
-    <button onclick="showPanel('settings')" title="Settings">⚙️</button>
+    <button onclick="openSettings()" title="Settings">⚙️</button>
   </div>
 </div>
 
 <div class="nav">
   <button class="active" onclick="showPanel('individual')" data-panel="individual">INDIVIDUAL</button>
-  <button onclick="showPanel('teams')" data-panel="teams">TEAMS</button>
+  <button onclick="showPanel('teams')" data-panel="teams">PAIRS</button>
   <button onclick="showPanel('history')" data-panel="history">HISTORY</button>
 </div>
 
-<!-- INDIVIDUAL LEADERBOARD -->
 <div id="panel-individual" class="panel active"></div>
-
-<!-- TEAM LEADERBOARD -->
 <div id="panel-teams" class="panel"></div>
-
-<!-- HISTORY -->
 <div id="panel-history" class="panel"></div>
-
-<!-- SETTINGS -->
-<div id="panel-settings" class="panel"></div>
 
 <button class="log-btn" onclick="openWizard()">+ LOG ROUND</button>
 
@@ -209,26 +185,21 @@ body{padding-bottom:80px}
     <button class="modal-close" onclick="closeWizard()">✕</button>
   </div>
   <div class="modal-body">
-    <!-- Step 1: Date + Course -->
     <div class="wizard-step active" id="step-1">
       <label class="form-label">DATE</label>
       <input type="date" class="form-input" id="round-date" style="margin-bottom:20px;color-scheme:dark">
       <label class="form-label">COURSE (OPTIONAL)</label>
       <input type="text" class="form-input" id="round-course" placeholder="e.g. METROPOLITAN GOLF CLUB" autocomplete="off">
     </div>
-    <!-- Step 2: Scores -->
     <div class="wizard-step" id="step-2">
       <div class="section-head">ENTER SCORES (9 HOLES)</div>
       <div id="score-entries"></div>
     </div>
-    <!-- Step 3: Teams -->
     <div class="wizard-step" id="step-3">
-      <div class="team-hint">TAP TO ASSIGN: TEAM A / TEAM B / NONE</div>
+      <div class="team-hint">TAP PLAYERS TO CYCLE THROUGH TEAMS (MAX 2 PER TEAM)</div>
+      <div class="team-hint" style="margin-top:-8px;margin-bottom:16px;font-size:9px">TEAMS 1+2 = FOURBALL 1 · TEAMS 3+4 = FOURBALL 2</div>
       <div id="team-entries"></div>
-      <div class="team-totals">
-        <div class="team-total-box a"><div class="team-total-label">TEAM A</div><div class="team-total-num" id="teamA-total">0</div></div>
-        <div class="team-total-box b"><div class="team-total-label">TEAM B</div><div class="team-total-num" id="teamB-total">0</div></div>
-      </div>
+      <div class="team-totals-grid" id="team-totals-grid"></div>
     </div>
   </div>
   <div class="modal-footer">
@@ -247,7 +218,7 @@ body{padding-bottom:80px}
   <button class="btn btn-primary" onclick="closeSuccess()" style="margin-top:20px">DONE</button>
 </div>
 
-<!-- SETTINGS MODAL -->
+<!-- SETTINGS -->
 <div class="modal-overlay" id="settings-modal">
   <div class="modal-header">
     <span class="modal-title">SETTINGS</span>
@@ -274,7 +245,7 @@ body{padding-bottom:80px}
 <div class="footer">BUILT BY COVE — 2026</div>
 
 <script>
-// ===== BANTER ENGINE =====
+// ===== BANTER =====
 const BANTER_LEADER=['Built different.','Carrying the group.','The rest of you are fighting for second.','Cold. Calculated. Clinical.','Pack it up boys.','Not even close.','Undisputed.','Walking cheat code.','Main character energy.'];
 const BANTER_LAST=['Somebody call a marshal.','At least the beer was cold.','Paying for lessons yet?','There\'s always mini golf.','The course won today.','Bless your heart.','Your handicap has a handicap.','Participation trophy incoming.','Down bad.','The trees saw more of your ball than the fairway did.','Consider a different hobby.','The cart girl played better.'];
 const BANTER_MID=['Mid.','Room for improvement (lots of room).','Not last, not first. Switzerland.','The definition of "fine."','Your mum would be proud. Your coach wouldn\'t.','Solidly mediocre.','Aggressively average.','Peak mediocrity.'];
@@ -282,10 +253,15 @@ const BANTER_TIED=['Dead heat. Settle it on the 19th hole.','Shared glory. Share
 const BANTER_NO_SHOW=['DNS. The coward\'s strategy.','Didn\'t fancy the embarrassment today?','Missing in action.','Probably for the best.','Smart — can\'t lose if you don\'t play.'];
 const BANTER_IMPROVING=['Glow-up szn.','Actually getting good? Suspicious.','Progress is progress. Respect.','The range sessions are paying off.','Watch out — dark horse incoming.'];
 const BANTER_DECLINING=['Wrong direction, mate.','Was it the yips or just vibes?','Regression to the mean. Way past the mean.','Trending down like crypto.','Peaked already?'];
+const BANTER_PAIR_WIN=['Dynamic duo strikes again.','They can\'t keep getting away with this.','Two-headed monster.','Chemistry is off the charts.','Unstoppable together.','That\'s called synergy, look it up.','Best thing since peanut butter & jelly.','Pair goals.','The dream team lives.','Telepathic golf right there.'];
+const BANTER_PAIR_LOSE=['Maybe try different partners.','The chemistry ain\'t there.','Couples therapy recommended.','Two wrongs don\'t make a right.','Should\'ve picked better.','The weakest link had company.','Combined disappointment.','Together in mediocrity.','Friendship tested. Friendship failed.','A pair of jokers.'];
 const BANTER_TEAM_WIN=['Squad goals.','Built like a dynasty.','Unbeatable when it matters.','Carried by vibes and wedge play.','That\'s a team right there.'];
 const BANTER_TEAM_LOSE=['Somebody has to lose.','At least you had each other.','Friendship was the real score.','Collective mid.','Split the blame evenly.'];
 
 function rng(arr){return arr[Math.floor(Math.random()*arr.length)]}
+
+// ===== TEAM NAME POOL =====
+const TEAM_NAMES_POOL=['The Hitmen','Cart Crashers','Bogey Brothers','The Sandbaggers','Fairway Assassins','Birdie Bandits','The Shankers','Club Slingers','Iron Maidens','The Hackers','Rough Riders','Par Busters','The Slicers','Green Goblins','Tee Totallers','The Duffers','Wedge Warriors','Pin Seekers','Eagle Eyes','Turf Torchers','The Mulligans','Double Bogeys','Grip Reapers','Putt Pirates','The Chippers','Sand Vipers','Drive Demons','Fade Lords'];
 
 // ===== DATA =====
 const DEFAULT_PLAYERS=['Keagan','James','Ben','Jacques','Shaun','Zach','Matt','Spencer'];
@@ -299,7 +275,7 @@ function loadData(){
 function saveData(d){localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}
 function getData(){return loadData()}
 
-// Seed existing round data
+// Seed data with first round including team info
 (function seedData(){
   let d=loadData();
   if(d.rounds.length===0){
@@ -307,9 +283,29 @@ function getData(){return loadData()}
       date:'2026-02-18',
       course:'METROPOLITAN GOLF CLUB',
       scores:{Keagan:39,James:39,Ben:39,Jacques:41},
-      teams:null
+      fourballs:[
+        {
+          pairs:[
+            {players:['Keagan','James'],teamName:'The Hitmen'},
+            {players:['Ben','Jacques'],teamName:'Bogey Brothers'}
+          ]
+        }
+      ]
     });
     saveData(d);
+  }
+  // Migrate old format
+  if(d.rounds.length>0 && d.rounds[0].teams && !d.rounds[0].fourballs){
+    // old format had teams:{a:[],b:[]}
+    const r=d.rounds[0];
+    if(r.teams){
+      r.fourballs=[{pairs:[
+        {players:r.teams.a,teamName:'Team A'},
+        {players:r.teams.b,teamName:'Team B'}
+      ]}];
+      delete r.teams;
+      saveData(d);
+    }
   }
 })();
 
@@ -321,10 +317,6 @@ function showPanel(name){
   if(panel){panel.classList.add('active');render(name)}
   const btn=document.querySelector(`.nav button[data-panel="${name}"]`);
   if(btn)btn.classList.add('active');
-  if(name==='settings'){
-    document.getElementById('settings-modal').classList.add('open');
-    return;
-  }
 }
 
 // ===== RENDER INDIVIDUAL =====
@@ -332,11 +324,8 @@ function renderIndividual(){
   const d=getData();
   const el=document.getElementById('panel-individual');
   if(d.rounds.length===0){el.innerHTML='<div class="empty-state"><p>NO ROUNDS YET</p><p>TAP LOG ROUND TO GET STARTED</p></div>';return}
-
-  // Calc stats per player
   const stats={};
   d.players.forEach(p=>stats[p]={wins:0,rounds:0,totalScore:0,bestScore:Infinity,scores:[]});
-
   d.rounds.forEach(r=>{
     const played=Object.keys(r.scores);
     if(played.length===0)return;
@@ -351,14 +340,11 @@ function renderIndividual(){
     });
     winners.forEach(p=>{if(stats[p])stats[p].wins++});
   });
-
-  // Sort by wins desc, then avg asc
   const sorted=d.players.filter(p=>stats[p].rounds>0).sort((a,b)=>{
     if(stats[b].wins!==stats[a].wins)return stats[b].wins-stats[a].wins;
     return(stats[a].totalScore/stats[a].rounds)-(stats[b].totalScore/stats[b].rounds);
   });
   const noShow=d.players.filter(p=>stats[p].rounds===0);
-
   let html='<div class="section-head">INDIVIDUAL LEADERBOARD</div>';
   sorted.forEach((p,i)=>{
     const s=stats[p];
@@ -371,9 +357,6 @@ function renderIndividual(){
     else if(isLeader)banter=rng(BANTER_LEADER);
     else if(isLast)banter=rng(BANTER_LAST);
     else banter=rng(BANTER_MID);
-    // Check tied
-    if(i>0&&stats[sorted[i-1]].wins===s.wins&&isLeader)banter=rng(BANTER_TIED);
-
     html+=`<div class="lb-player ${isLeader?'leader':''} ${isLast?'last':''}">
       <div class="lb-rank">${i+1}</div>
       <div class="lb-info">
@@ -384,7 +367,6 @@ function renderIndividual(){
       <div style="text-align:center"><div class="lb-wins">${s.wins}</div><div class="lb-wins-label">WINS</div></div>
     </div>`;
   });
-
   if(noShow.length>0){
     html+='<div class="section-head" style="margin-top:24px">MISSING IN ACTION</div>';
     noShow.forEach(p=>{
@@ -394,8 +376,6 @@ function renderIndividual(){
       </div>`;
     });
   }
-
-  // Season stats
   const totalRounds=d.rounds.length;
   const months=new Set(d.rounds.map(r=>r.date.slice(0,7))).size;
   html+=`<div class="season-stats" style="margin-top:24px">
@@ -404,46 +384,108 @@ function renderIndividual(){
     <div class="stat-row"><span class="stat-label">MONTHS ACTIVE</span><span class="stat-value">${months}</span></div>
     <div class="stat-row"><span class="stat-label">PLAYERS</span><span class="stat-value">${d.players.length}</span></div>
   </div>`;
-
   el.innerHTML=html;
 }
 
-// ===== RENDER TEAMS =====
+// ===== RENDER TEAMS / PAIRS =====
+let teamsSubTab='matches';
 function renderTeams(){
   const d=getData();
   const el=document.getElementById('panel-teams');
-  const teamRounds=d.rounds.filter(r=>r.teams);
-  if(teamRounds.length===0){el.innerHTML='<div class="empty-state"><p>NO TEAM ROUNDS YET</p><p>LOG A ROUND WITH TEAM ASSIGNMENTS</p></div>';return}
+  let html=`<div class="sub-tabs">
+    <div class="sub-tab ${teamsSubTab==='matches'?'active':''}" onclick="teamsSubTab='matches';renderTeams()">MATCHES</div>
+    <div class="sub-tab ${teamsSubTab==='pairs'?'active':''}" onclick="teamsSubTab='pairs';renderTeams()">BEST PAIRS</div>
+  </div>`;
 
-  let html='<div class="section-head">TEAM MATCHUPS</div>';
+  if(teamsSubTab==='matches'){html+=renderMatchHistory(d)}
+  else{html+=renderPairsLeaderboard(d)}
+  el.innerHTML=html;
+}
+
+function renderMatchHistory(d){
+  const teamRounds=d.rounds.filter(r=>r.fourballs&&r.fourballs.length>0);
+  if(teamRounds.length===0)return'<div class="empty-state"><p>NO PAIR MATCHES YET</p><p>LOG A ROUND WITH TEAM ASSIGNMENTS</p></div>';
+  let html='<div class="section-head">PAIR MATCHUPS</div>';
   teamRounds.slice().reverse().forEach(r=>{
-    const t=r.teams;
-    const totalA=t.a.reduce((s,p)=>s+(r.scores[p]||0),0);
-    const totalB=t.b.reduce((s,p)=>s+(r.scores[p]||0),0);
-    const aWins=totalA<totalB;
-    const bWins=totalB<totalA;
-    const tied=totalA===totalB;
     html+=`<div class="team-match">
       <div class="team-match-date">${r.date}</div>
-      ${r.course?`<div class="team-match-course">${r.course}</div>`:''}
-      <div class="team-vs">
-        <div class="team-side a ${aWins?'winner':bWins?'loser':''}">
-          <div class="team-side-label">TEAM A</div>
-          <div class="team-names">${t.a.join(', ')}</div>
-          <div class="team-total">${totalA}</div>
+      ${r.course?`<div class="team-match-course">${r.course}</div>`:''}`;
+    r.fourballs.forEach((fb,fi)=>{
+      if(fb.pairs.length<2)return;
+      const pA=fb.pairs[0], pB=fb.pairs[1];
+      const totalA=pA.players.reduce((s,p)=>s+(r.scores[p]||0),0);
+      const totalB=pB.players.reduce((s,p)=>s+(r.scores[p]||0),0);
+      const aWins=totalA<totalB, bWins=totalB<totalA, tied=totalA===totalB;
+      html+=`<div class="fourball-label">FOURBALL ${fi+1}</div>
+        <div class="team-vs">
+          <div class="team-side ${aWins?'winner':bWins?'loser':''}">
+            <div class="team-side-name">${pA.teamName||'PAIR A'}</div>
+            <div class="team-names">${pA.players.join(' & ')}</div>
+            <div class="team-total">${totalA}</div>
+          </div>
+          <div class="team-vs-divider">VS</div>
+          <div class="team-side ${bWins?'winner':aWins?'loser':''}">
+            <div class="team-side-name">${pB.teamName||'PAIR B'}</div>
+            <div class="team-names">${pB.players.join(' & ')}</div>
+            <div class="team-total">${totalB}</div>
+          </div>
         </div>
-        <div class="team-vs-divider">VS</div>
-        <div class="team-side b ${bWins?'winner':aWins?'loser':''}">
-          <div class="team-side-label">TEAM B</div>
-          <div class="team-names">${t.b.join(', ')}</div>
-          <div class="team-total">${totalB}</div>
+        <div class="team-banter">"${tied?rng(BANTER_TIED):(aWins?rng(BANTER_PAIR_WIN):rng(BANTER_PAIR_WIN))}"</div>`;
+    });
+    html+=`</div>`;
+  });
+  return html;
+}
+
+function renderPairsLeaderboard(d){
+  // Build pair stats from all fourballs
+  const pairMap={};
+  d.rounds.forEach(r=>{
+    if(!r.fourballs)return;
+    r.fourballs.forEach(fb=>{
+      if(fb.pairs.length<2)return;
+      for(let pi=0;pi<fb.pairs.length;pi++){
+        const pair=fb.pairs[pi];
+        const opp=fb.pairs[pi===0?1:0];
+        const key=pair.players.slice().sort().join('+');
+        if(!pairMap[key])pairMap[key]={players:pair.players.slice().sort(),wins:0,losses:0,draws:0,totalScore:0,matches:0,names:[]};
+        const myTotal=pair.players.reduce((s,p)=>s+(r.scores[p]||0),0);
+        const oppTotal=opp.players.reduce((s,p)=>s+(r.scores[p]||0),0);
+        pairMap[key].totalScore+=myTotal;
+        pairMap[key].matches++;
+        if(pair.teamName&&!pairMap[key].names.includes(pair.teamName))pairMap[key].names.push(pair.teamName);
+        if(myTotal<oppTotal)pairMap[key].wins++;
+        else if(myTotal>oppTotal)pairMap[key].losses++;
+        else pairMap[key].draws++;
+      }
+    });
+  });
+  const pairs=Object.values(pairMap).sort((a,b)=>{
+    const wrA=a.matches?a.wins/a.matches:0;
+    const wrB=b.matches?b.wins/b.matches:0;
+    if(wrB!==wrA)return wrB-wrA;
+    return a.totalScore/a.matches-b.totalScore/b.matches;
+  });
+  if(pairs.length===0)return'<div class="empty-state"><p>NO PAIR DATA YET</p></div>';
+  let html='<div class="section-head">BEST PARTNERSHIPS</div>';
+  pairs.forEach((p,i)=>{
+    const wr=p.matches?(p.wins/p.matches*100).toFixed(0):0;
+    const avg=p.matches?(p.totalScore/p.matches).toFixed(0):'—';
+    const isTop=i===0;
+    const nameStr=p.names.length>0?p.names[p.names.length-1]:'';
+    html+=`<div class="pair-card ${isTop?'top-pair':''}">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div class="pair-names">${p.players.join(' & ')}</div>
+          ${nameStr?`<div class="pair-team-name">${nameStr}</div>`:''}
+          <div class="pair-stats">${p.wins}W ${p.losses}L ${p.draws}D · AVG ${avg} · ${wr}% WIN RATE</div>
+          <div class="lb-banter" style="margin-top:4px">"${p.wins>p.losses?rng(BANTER_PAIR_WIN):p.losses>0?rng(BANTER_PAIR_LOSE):rng(BANTER_MID)}"</div>
         </div>
+        <div style="text-align:center"><div class="pair-record">${p.wins}-${p.losses}</div><div class="lb-wins-label">W-L</div></div>
       </div>
-      <div class="team-banter">"${tied?rng(BANTER_TIED):(aWins?rng(BANTER_TEAM_WIN):rng(BANTER_TEAM_LOSE))}"</div>
     </div>`;
   });
-
-  el.innerHTML=html;
+  return html;
 }
 
 // ===== RENDER HISTORY =====
@@ -451,21 +493,31 @@ function renderHistory(){
   const d=getData();
   const el=document.getElementById('panel-history');
   if(d.rounds.length===0){el.innerHTML='<div class="empty-state"><p>NO ROUNDS YET</p></div>';return}
-
   let html='<div class="section-head">ROUND HISTORY</div>';
-  d.rounds.slice().reverse().forEach((r,idx)=>{
+  d.rounds.slice().reverse().forEach(r=>{
     const played=Object.entries(r.scores).sort((a,b)=>a[1]-b[1]);
     const minScore=played.length>0?played[0][1]:0;
+    let teamHtml='';
+    if(r.fourballs&&r.fourballs.length>0){
+      r.fourballs.forEach((fb,fi)=>{
+        if(fb.pairs.length<2)return;
+        const pA=fb.pairs[0],pB=fb.pairs[1];
+        const tA=pA.players.reduce((s,p)=>s+(r.scores[p]||0),0);
+        const tB=pB.players.reduce((s,p)=>s+(r.scores[p]||0),0);
+        const winner=tA<tB?pA:tB<tA?pB:null;
+        teamHtml+=`<div class="history-team-result">
+          FB${fi+1}: ${pA.teamName||pA.players.join('+')} ${tA} vs ${pB.teamName||pB.players.join('+')} ${tB}
+          ${winner?' — '+((winner.teamName||winner.players.join('+'))+' WIN'):'— DRAW'}
+        </div>`;
+      });
+    } else {
+      teamHtml='<div class="history-team-result" style="color:#555">NO TEAM GAME</div>';
+    }
     html+=`<div class="history-round" onclick="this.classList.toggle('expanded')">
       <div class="history-date">${r.date}</div>
       ${r.course?`<div class="history-course">${r.course}</div>`:''}
       <div class="history-scores">${played.map(([p,s])=>`<span class="history-score ${s===minScore?'winner':''}">${p} ${s}</span>`).join('')}</div>
-      <div class="history-details">
-        ${r.teams?`<div class="history-team-result">
-          TEAM A (${r.teams.a.join(', ')}): ${r.teams.a.reduce((sum,p)=>sum+(r.scores[p]||0),0)} vs
-          TEAM B (${r.teams.b.join(', ')}): ${r.teams.b.reduce((sum,p)=>sum+(r.scores[p]||0),0)}
-        </div>`:'<div class="history-team-result" style="color:#555">NO TEAM GAME</div>'}
-      </div>
+      <div class="history-details">${teamHtml}</div>
     </div>`;
   });
   el.innerHTML=html;
@@ -481,21 +533,17 @@ function render(panel){
 let wizardStep=1;
 let wizardScores={};
 let wizardSatOut={};
-let wizardTeams={};
+let wizardTeamAssign={}; // player -> 0(none),1,2,3,4
+let wizardTeamNames={1:'',2:'',3:'',4:''};
 
 function openWizard(){
   const d=getData();
   wizardStep=1;
-  wizardScores={};
-  wizardSatOut={};
-  wizardTeams={};
-  d.players.forEach(p=>{wizardScores[p]=36;wizardSatOut[p]=false;wizardTeams[p]=null});
-
-  const today=new Date().toISOString().slice(0,10);
-  document.getElementById('round-date').value=today;
+  wizardScores={};wizardSatOut={};wizardTeamAssign={};
+  wizardTeamNames={1:'',2:'',3:'',4:''};
+  d.players.forEach(p=>{wizardScores[p]=36;wizardSatOut[p]=false;wizardTeamAssign[p]=0});
+  document.getElementById('round-date').value=new Date().toISOString().slice(0,10);
   document.getElementById('round-course').value='';
-
-  // Build score entries
   let scoreHtml='';
   d.players.forEach(p=>{
     scoreHtml+=`<div class="score-row" id="row-${p}">
@@ -509,11 +557,9 @@ function openWizard(){
     </div>`;
   });
   document.getElementById('score-entries').innerHTML=scoreHtml;
-
   showWizardStep(1);
   document.getElementById('wizard').classList.add('open');
 }
-
 function closeWizard(){document.getElementById('wizard').classList.remove('open')}
 
 function showWizardStep(step){
@@ -523,16 +569,13 @@ function showWizardStep(step){
   document.getElementById('wizard-back').style.display=step>1?'':'none';
   document.getElementById('wizard-skip').style.display=step===3?'':'none';
   document.getElementById('wizard-next').textContent=step===3?'SAVE':'NEXT';
-
   const titles=['','LOG ROUND — DATE','LOG ROUND — SCORES','LOG ROUND — TEAMS'];
   document.getElementById('wizard-title').textContent=titles[step];
-
   if(step===3)buildTeamStep();
 }
 
 function wizardNext(){
-  if(wizardStep===1){showWizardStep(2);return}
-  if(wizardStep===2){showWizardStep(3);return}
+  if(wizardStep<3){showWizardStep(wizardStep+1);return}
   if(wizardStep===3){saveRound();return}
 }
 function wizardBack(){if(wizardStep>1)showWizardStep(wizardStep-1)}
@@ -542,53 +585,88 @@ function adjScore(p,delta){
   document.getElementById('score-'+p).value=wizardScores[p];
 }
 function setScore(p,v){wizardScores[p]=Math.max(18,Math.min(99,parseInt(v)||36))}
-
 function toggleSatOut(p){
   wizardSatOut[p]=!wizardSatOut[p];
-  const row=document.getElementById('row-'+p);
-  const btn=document.getElementById('sat-'+p);
-  if(wizardSatOut[p]){row.classList.add('sat-out');btn.classList.add('active')}
-  else{row.classList.remove('sat-out');btn.classList.remove('active')}
+  document.getElementById('row-'+p).classList.toggle('sat-out',wizardSatOut[p]);
+  document.getElementById('sat-'+p).classList.toggle('active',wizardSatOut[p]);
 }
+
+const TEAM_COLORS=['','t1','t2','t3','t4'];
+const TEAM_LABELS=['—','TEAM 1','TEAM 2','TEAM 3','TEAM 4'];
 
 function buildTeamStep(){
   const d=getData();
   const played=d.players.filter(p=>!wizardSatOut[p]);
+  // Auto-assign random team names
+  const shuffled=[...TEAM_NAMES_POOL].sort(()=>Math.random()-.5);
+  for(let t=1;t<=4;t++){if(!wizardTeamNames[t])wizardTeamNames[t]=shuffled[t-1]}
+
   let html='';
   played.forEach(p=>{
-    html+=`<div class="team-assign-player ${wizardTeams[p]?'team'+wizardTeams[p]:''}" id="ta-${p}" onclick="toggleTeam('${p}')">
+    const t=wizardTeamAssign[p]||0;
+    html+=`<div class="team-assign-player ${TEAM_COLORS[t]}" id="ta-${p}" onclick="cycleTeam('${p}')">
       <div><div class="team-assign-name">${p}</div><div class="team-assign-score">${wizardScores[p]}</div></div>
-      <div class="team-assign-tag" id="tag-${p}">${wizardTeams[p]?'TEAM '+wizardTeams[p]:'—'}</div>
+      <div class="team-assign-tag" id="tag-${p}">${TEAM_LABELS[t]}</div>
     </div>`;
   });
   document.getElementById('team-entries').innerHTML=html;
   updateTeamTotals();
 }
 
-function toggleTeam(p){
-  const cycle=[null,'A','B'];
-  const cur=cycle.indexOf(wizardTeams[p]);
-  wizardTeams[p]=cycle[(cur+1)%3];
+function cycleTeam(p){
+  const d=getData();
+  const played=d.players.filter(pl=>!wizardSatOut[pl]);
+  let cur=wizardTeamAssign[p]||0;
+  // Find next team that has <2 members (or 0)
+  for(let i=1;i<=5;i++){
+    const next=(cur+i)%5;
+    if(next===0){wizardTeamAssign[p]=0;break}
+    const count=played.filter(pl=>wizardTeamAssign[pl]===next&&pl!==p).length;
+    if(count<2){wizardTeamAssign[p]=next;break}
+  }
+  const t=wizardTeamAssign[p];
   const el=document.getElementById('ta-'+p);
-  el.className='team-assign-player'+(wizardTeams[p]?' team'+wizardTeams[p]:'');
-  document.getElementById('tag-'+p).textContent=wizardTeams[p]?'TEAM '+wizardTeams[p]:'—';
+  el.className='team-assign-player '+TEAM_COLORS[t];
+  document.getElementById('tag-'+p).textContent=TEAM_LABELS[t];
   updateTeamTotals();
 }
 
 function updateTeamTotals(){
   const d=getData();
   const played=d.players.filter(p=>!wizardSatOut[p]);
-  let tA=0,tB=0;
-  played.forEach(p=>{
-    if(wizardTeams[p]==='A')tA+=wizardScores[p];
-    if(wizardTeams[p]==='B')tB+=wizardScores[p];
-  });
-  document.getElementById('teamA-total').textContent=tA||'—';
-  document.getElementById('teamB-total').textContent=tB||'—';
+  let html='';
+  for(let t=1;t<=4;t++){
+    const members=played.filter(p=>wizardTeamAssign[p]===t);
+    const total=members.reduce((s,p)=>s+wizardScores[p],0);
+    html+=`<div class="team-total-box tb${t}">
+      <div class="team-total-label">${wizardTeamNames[t]||'TEAM '+t}</div>
+      <div class="team-total-num">${members.length>0?total:'—'}</div>
+      <div class="team-total-players">${members.join(' + ')||'EMPTY'}</div>
+      <select class="team-name-select" onchange="wizardTeamNames[${t}]=this.value;updateTeamTotals()" ${members.length===0?'disabled':''}>
+        ${TEAM_NAMES_POOL.map(n=>`<option value="${n}" ${wizardTeamNames[t]===n?'selected':''}>${n}</option>`).join('')}
+      </select>
+    </div>`;
+  }
+  // Show fourball matchup preview
+  const fb1t1=played.filter(p=>wizardTeamAssign[p]===1);
+  const fb1t2=played.filter(p=>wizardTeamAssign[p]===2);
+  const fb2t1=played.filter(p=>wizardTeamAssign[p]===3);
+  const fb2t2=played.filter(p=>wizardTeamAssign[p]===4);
+  const s1=fb1t1.reduce((s,p)=>s+wizardScores[p],0);
+  const s2=fb1t2.reduce((s,p)=>s+wizardScores[p],0);
+  const s3=fb2t1.reduce((s,p)=>s+wizardScores[p],0);
+  const s4=fb2t2.reduce((s,p)=>s+wizardScores[p],0);
+  if(fb1t1.length>0||fb1t2.length>0){
+    html+=`<div style="grid-column:1/-1;text-align:center;padding:8px 0;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--grey);letter-spacing:1px">
+      FOURBALL 1: ${wizardTeamNames[1]||'T1'} ${s1} vs ${wizardTeamNames[2]||'T2'} ${s2}
+      ${fb2t1.length>0||fb2t2.length>0?`<br>FOURBALL 2: ${wizardTeamNames[3]||'T3'} ${s3} vs ${wizardTeamNames[4]||'T4'} ${s4}`:''}
+    </div>`;
+  }
+  document.getElementById('team-totals-grid').innerHTML=html;
 }
 
 function wizardSkipTeams(){
-  wizardTeams={};
+  wizardTeamAssign={};
   saveRound();
 }
 
@@ -596,21 +674,35 @@ function saveRound(){
   const d=getData();
   const scores={};
   d.players.forEach(p=>{if(!wizardSatOut[p])scores[p]=wizardScores[p]});
+  const played=d.players.filter(p=>!wizardSatOut[p]);
 
-  const hasTeams=Object.values(wizardTeams).some(t=>t);
-  let teams=null;
+  // Build fourballs from team assignments
+  let fourballs=[];
+  const hasTeams=played.some(p=>wizardTeamAssign[p]>0);
   if(hasTeams){
-    teams={
-      a:d.players.filter(p=>wizardTeams[p]==='A'),
-      b:d.players.filter(p=>wizardTeams[p]==='B')
-    };
+    const t1=played.filter(p=>wizardTeamAssign[p]===1);
+    const t2=played.filter(p=>wizardTeamAssign[p]===2);
+    const t3=played.filter(p=>wizardTeamAssign[p]===3);
+    const t4=played.filter(p=>wizardTeamAssign[p]===4);
+    if(t1.length>0&&t2.length>0){
+      fourballs.push({pairs:[
+        {players:t1,teamName:wizardTeamNames[1]||'Team 1'},
+        {players:t2,teamName:wizardTeamNames[2]||'Team 2'}
+      ]});
+    }
+    if(t3.length>0&&t4.length>0){
+      fourballs.push({pairs:[
+        {players:t3,teamName:wizardTeamNames[3]||'Team 3'},
+        {players:t4,teamName:wizardTeamNames[4]||'Team 4'}
+      ]});
+    }
   }
 
   d.rounds.push({
     date:document.getElementById('round-date').value,
     course:(document.getElementById('round-course').value||'').toUpperCase(),
     scores,
-    teams
+    fourballs:fourballs.length>0?fourballs:null
   });
   saveData(d);
   closeWizard();
@@ -620,33 +712,26 @@ function saveRound(){
 
 // ===== SUCCESS =====
 function showSuccess(){
-  const el=document.getElementById('success');
-  el.classList.add('open');
+  document.getElementById('success').classList.add('open');
   fireConfetti();
   const subs=['Another one in the books.','That\'s golf, baby.','Scores don\'t lie.','The 19th hole awaits.','Logged. Judged. Roasted.'];
   document.getElementById('success-sub').textContent=rng(subs);
 }
 function closeSuccess(){document.getElementById('success').classList.remove('open');document.getElementById('confetti').innerHTML=''}
-
 function fireConfetti(){
-  const container=document.getElementById('confetti');
-  container.innerHTML='';
+  const c=document.getElementById('confetti');c.innerHTML='';
   const colors=['#CCFF00','#00CCFF','#FF3333','#FFFFFF','#FF00FF'];
   for(let i=0;i<60;i++){
-    const piece=document.createElement('div');
-    piece.className='confetti-piece';
-    piece.style.left=Math.random()*100+'%';
-    piece.style.background=colors[Math.floor(Math.random()*colors.length)];
-    piece.style.animationDelay=Math.random()*0.8+'s';
-    piece.style.animationDuration=(1+Math.random())+'s';
-    piece.style.width=(6+Math.random()*8)+'px';
-    piece.style.height=(6+Math.random()*8)+'px';
-    container.appendChild(piece);
+    const p=document.createElement('div');p.className='confetti-piece';
+    p.style.left=Math.random()*100+'%';p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDelay=Math.random()*0.8+'s';p.style.animationDuration=(1+Math.random())+'s';
+    p.style.width=(6+Math.random()*8)+'px';p.style.height=(6+Math.random()*8)+'px';
+    c.appendChild(p);
   }
 }
 
 // ===== SETTINGS =====
-function showSettings(){
+function openSettings(){
   const d=getData();
   let html='';
   d.players.forEach((p,i)=>{
@@ -656,51 +741,25 @@ function showSettings(){
   document.getElementById('settings-modal').classList.add('open');
 }
 function closeSettings(){document.getElementById('settings-modal').classList.remove('open')}
-
-// Override showPanel for settings
-const _showPanel=showPanel;
-showPanel=function(name){
-  if(name==='settings'){showSettings();return}
-  _showPanel(name);
-};
-
 function savePlayerNames(){
   const d=getData();
   d.players=d.players.map((_,i)=>document.getElementById('pname-'+i).value.trim()||DEFAULT_PLAYERS[i]);
-  saveData(d);
-  closeSettings();
-  render('individual');
+  saveData(d);closeSettings();render('individual');
 }
-
 function exportData(){
   const d=getData();
   const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='cove-golf-data.json';
-  a.click();
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cove-golf-data.json';a.click();
 }
-
 function importData(e){
-  const file=e.target.files[0];
-  if(!file)return;
+  const file=e.target.files[0];if(!file)return;
   const reader=new FileReader();
   reader.onload=function(ev){
-    try{
-      const d=JSON.parse(ev.target.result);
-      if(d.players&&d.rounds){saveData(d);location.reload()}
-      else alert('Invalid data format');
-    }catch(err){alert('Error reading file')}
-  };
-  reader.readAsText(file);
+    try{const d=JSON.parse(ev.target.result);if(d.players&&d.rounds){saveData(d);location.reload()}else alert('Invalid data format')}
+    catch(err){alert('Error reading file')}
+  };reader.readAsText(file);
 }
-
-function clearAllData(){
-  if(confirm('DELETE ALL DATA? This cannot be undone.')){
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
-  }
-}
+function clearAllData(){if(confirm('DELETE ALL DATA? This cannot be undone.')){localStorage.removeItem(STORAGE_KEY);location.reload()}}
 
 // ===== INIT =====
 renderIndividual();
