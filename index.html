@@ -70,6 +70,10 @@ body{padding-bottom:80px}
 .history-score.winner{border-color:var(--lime);color:var(--lime)}
 .history-details{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--mid)}
 .history-round.expanded .history-details{display:block}
+.history-delete{position:absolute;top:12px;right:12px;background:none;border:1px solid #ff3333;color:#ff3333;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;padding:4px 10px;cursor:pointer;opacity:0;transition:opacity .2s;text-transform:uppercase;z-index:5}
+.history-round.expanded .history-delete{opacity:1}
+.history-delete:active{background:#ff3333;color:#000}
+.history-round{position:relative}
 .history-team-result{font-size:12px;color:var(--grey);margin-top:8px;font-family:'JetBrains Mono',monospace}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:200;overflow-y:auto}
 .modal-overlay.open{display:flex;flex-direction:column}
@@ -555,7 +559,9 @@ function renderHistory(){
     } else {
       teamHtml='<div class="history-team-result" style="color:#555">NO TEAM GAME</div>';
     }
+    const ri=d.rounds.indexOf(r);
     html+=`<div class="history-round" onclick="this.classList.toggle('expanded')">
+      <button class="history-delete" onclick="event.stopPropagation();deleteRound(${ri})">DELETE</button>
       <div class="history-date">${r.date}</div>
       ${r.course?`<div class="history-course">${r.course}</div>`:''}
       <div class="history-scores">${played.map(([p,s])=>`<span class="history-score ${s===minScore?'winner':''}">${p} ${s}</span>`).join('')}</div>
@@ -800,6 +806,16 @@ function importData(e){
     try{const d=JSON.parse(ev.target.result);if(d.players&&d.rounds){saveData(d);location.reload()}else alert('Invalid data format')}
     catch(err){alert('Error reading file')}
   };reader.readAsText(file);
+}
+function deleteRound(idx){
+  if(!confirm('Delete this round?'))return;
+  const d=loadData();
+  d.rounds.splice(idx,1);
+  saveData(d);
+  pushToCloud(d);
+  renderHistory();
+  renderIndividual();
+  renderTeams();
 }
 function clearAllData(){if(confirm('DELETE ALL DATA? This cannot be undone.')){localStorage.removeItem(STORAGE_KEY);location.reload()}}
 
