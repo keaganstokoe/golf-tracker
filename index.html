@@ -208,7 +208,8 @@ input::placeholder{color:#333}
 </nav>
 
 <script>
-let state = JSON.parse(localStorage.getItem('golfTracker') || 'null') || {players:[], rounds:[]};
+const DEFAULT_PLAYERS = ['Keagan','James','Ben','Jacques','Shaun','Zach','Matt','Spencer'];
+let state = JSON.parse(localStorage.getItem('golfTracker') || 'null') || {players:DEFAULT_PLAYERS, rounds:[]};
 let currentLB = 'individual';
 let roundType = 'individual';
 let teamFormat = '2v2';
