@@ -162,6 +162,7 @@ body{padding-bottom:80px}
 <div class="header">
   <h1>⛳ COVE GOLF</h1>
   <div class="header-icons">
+    <span id="sync-status" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--grey);padding:4px 8px">—</span>
     <button onclick="openSettings()" title="Settings">⚙️</button>
   </div>
 </div>
@@ -263,19 +264,77 @@ function rng(arr){return arr[Math.floor(Math.random()*arr.length)]}
 // ===== TEAM NAME POOL =====
 const TEAM_NAMES_POOL=['The Hitmen','Cart Crashers','Bogey Brothers','The Sandbaggers','Fairway Assassins','Birdie Bandits','The Shankers','Club Slingers','Iron Maidens','The Hackers','Rough Riders','Par Busters','The Slicers','Green Goblins','Tee Totallers','The Duffers','Wedge Warriors','Pin Seekers','Eagle Eyes','Turf Torchers','The Mulligans','Double Bogeys','Grip Reapers','Putt Pirates','The Chippers','Sand Vipers','Drive Demons','Fade Lords'];
 
-// ===== DATA =====
+// ===== DATA + CLOUD SYNC =====
 const DEFAULT_PLAYERS=['Keagan','James','Ben','Jacques','Shaun','Zach','Matt','Spencer'];
 const STORAGE_KEY='cove_golf_data';
+const BLOB_ID='019c7253-2e90-7e0a-97b0-20325175ea30';
+const BLOB_URL='https://jsonblob.com/api/jsonBlob/'+BLOB_ID;
+let _cloudData=null;
+let _syncInterval=null;
+let _lastCloudHash='';
 
 function loadData(){
+  if(_cloudData)return JSON.parse(JSON.stringify(_cloudData));
   let d=localStorage.getItem(STORAGE_KEY);
   if(d){try{return JSON.parse(d)}catch(e){}}
   return{players:[...DEFAULT_PLAYERS],rounds:[]};
 }
-function saveData(d){localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}
+function saveData(d){
+  _cloudData=JSON.parse(JSON.stringify(d));
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(d));
+  pushToCloud(d);
+}
 function getData(){return loadData()}
 
-// Seed data with first round including team info
+function setSyncStatus(text,color){
+  const el=document.getElementById('sync-status');
+  if(el){el.textContent=text;el.style.color=color||'var(--grey)'}
+}
+
+async function pullFromCloud(){
+  try{
+    setSyncStatus('↻ SYNCING','var(--grey)');
+    const r=await fetch(BLOB_URL);
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const d=await r.json();
+    if(d&&d.players&&d.rounds){
+      const hash=JSON.stringify(d);
+      if(hash!==_lastCloudHash){
+        _lastCloudHash=hash;
+        _cloudData=d;
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(d));
+        // Re-render active panel
+        const active=document.querySelector('.nav button.active');
+        if(active)render(active.dataset.panel);
+      }
+      setSyncStatus('✓ SYNCED','var(--lime)');
+    }
+  }catch(e){
+    console.warn('Cloud pull failed:',e);
+    setSyncStatus('✗ OFFLINE','#ff3333');
+  }
+}
+
+async function pushToCloud(d){
+  try{
+    setSyncStatus('↻ SAVING','var(--lime)');
+    const r=await fetch(BLOB_URL,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    _lastCloudHash=JSON.stringify(d);
+    setSyncStatus('✓ SYNCED','var(--lime)');
+  }catch(e){
+    console.warn('Cloud push failed:',e);
+    setSyncStatus('✗ SAVE FAILED','#ff3333');
+  }
+}
+
+// Start sync: pull immediately, then poll every 12s
+(async function initSync(){
+  await pullFromCloud();
+  _syncInterval=setInterval(pullFromCloud,12000);
+})();
+
+// Seed check (only if cloud is empty)
 (function seedData(){
   let d=loadData();
   if(d.rounds.length===0){
@@ -283,29 +342,12 @@ function getData(){return loadData()}
       date:'2026-02-18',
       course:'METROPOLITAN GOLF CLUB',
       scores:{Keagan:39,James:39,Ben:39,Jacques:41},
-      fourballs:[
-        {
-          pairs:[
-            {players:['Keagan','James'],teamName:'The Hitmen'},
-            {players:['Ben','Jacques'],teamName:'Bogey Brothers'}
-          ]
-        }
-      ]
+      fourballs:[{pairs:[
+        {players:['Keagan','James'],teamName:'The Hitmen'},
+        {players:['Ben','Jacques'],teamName:'Bogey Brothers'}
+      ]}]
     });
     saveData(d);
-  }
-  // Migrate old format
-  if(d.rounds.length>0 && d.rounds[0].teams && !d.rounds[0].fourballs){
-    // old format had teams:{a:[],b:[]}
-    const r=d.rounds[0];
-    if(r.teams){
-      r.fourballs=[{pairs:[
-        {players:r.teams.a,teamName:'Team A'},
-        {players:r.teams.b,teamName:'Team B'}
-      ]}];
-      delete r.teams;
-      saveData(d);
-    }
   }
 })();
 
